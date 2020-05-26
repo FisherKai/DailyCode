@@ -144,3 +144,35 @@ export const scrollToTop = () => {
         window.scrollTo(0, c - c / 8);
     }
 }
+
+/**
+ * el是否在窗口范围内
+ * @param {*} el 
+ * @param {*} partiallyVisible 
+ */
+export const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
+    const { top, left, bottom, right } = el.getBoundingClientRect();
+    const { innerHeight, innerWidth } = window;
+    return partiallyVisible
+        ? ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+        : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
+}
+
+/**
+ * 劫持剪贴板
+ * @param {*} value 
+ */
+export const copyTextToClipboard = (value) => {
+    var textArea = document.createElement("textarea");
+    textArea.style.background = 'transparent';
+    textArea.value = value;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        var successful = document.execCommand('copy');
+    } catch (err) {
+        console.log('Oh,unable to copy');
+    }
+    document.body.removeChild(textArea);
+}
