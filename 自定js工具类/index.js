@@ -176,3 +176,224 @@ export const copyTextToClipboard = (value) => {
     }
     document.body.removeChild(textArea);
 }
+
+/**
+ * 判断类型集合
+ * @param {*} str 
+ * @param {*} type 
+ */
+export const checkStr = (str, type) => {
+    switch (type) {
+        case 'phone':   //手机号码
+            return /^1[3|4|5|6|7|8|9][0-9]{9}$/.test(str);
+        case 'tel':     //座机
+            return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(str);
+        case 'card':    //身份证
+            return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(str);
+        case 'pwd':     //密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线
+            return /^[a-zA-Z]\w{5,17}$/.test(str)
+        case 'postal':  //邮政编码
+            return /[1-9]\d{5}(?!\d)/.test(str);
+        case 'QQ':      //QQ号
+            return /^[1-9][0-9]{4,9}$/.test(str);
+        case 'email':   //邮箱
+            return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(str);
+        case 'money':   //金额(小数点2位)
+            return /^\d*(?:\.\d{0,2})?$/.test(str);
+        case 'URL':     //网址
+            return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(str)
+        case 'IP':      //IP
+            return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(str);
+        case 'date':    //日期时间
+            return /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2})(?:\:\d{2}|:(\d{2}):(\d{2}))$/.test(str) || /^(\d{4})\-(\d{2})\-(\d{2})$/.test(str)
+        case 'number':  //数字
+            return /^[0-9]$/.test(str);
+        case 'english': //英文
+            return /^[a-zA-Z]+$/.test(str);
+        case 'chinese': //中文
+            return /^[\\u4E00-\\u9FA5]+$/.test(str);
+        case 'lower':   //小写
+            return /^[a-z]+$/.test(str);
+        case 'upper':   //大写
+            return /^[A-Z]+$/.test(str);
+        case 'HTML':    //HTML标记
+            return /<("[^"]*"|'[^']*'|[^'">])*>/.test(str);
+        default:
+            return true;
+    }
+}
+
+/**
+ * 生成随机数
+ * @param {*} min 
+ * @param {*} max 
+ */
+export const random = (min, max) => {
+    if (arguments.length === 2) {
+        return Math.floor(min + Math.random() * ((max + 1) - min))
+    } else {
+        return null;
+    }
+}
+
+/**
+ * 判断数组是否包含某个值
+ * @param {*} arr 
+ * @param {*} val 
+ */
+export const contains = (arr, val) => {
+    return arr.indexOf(val) != -1 ? true : false;
+}
+
+/**
+ * 数组排序  1：从小到大  2：从大到小  3：随机排列
+ * @param {*} arr 
+ * @param {*} type 
+ */
+export const sort = (arr, type = 1) => {
+    return arr.sort((a, b) => {
+        switch (type) {
+            case 1:
+                return a - b;
+            case 2:
+                return b - a;
+            case 3:
+                return Math.random() - 0.5;
+            default:
+                return arr;
+        }
+    })
+}
+
+/**
+ * 数组去重
+ * @param {*} arr 
+ */
+export const unique = (arr) => {
+    if (Array.hasOwnProperty('from')) {
+        return Array.from(new Set(arr));
+    } else {
+        var n = {}, r = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!n[arr[i]]) {
+                n[arr[i]] = true;
+                r.push(arr[i]);
+            }
+        }
+        return r;
+    }
+}
+
+/**
+ * 返回两个数组的并集
+ * @param {*} a 
+ * @param {*} b 
+ */
+export const union = (a, b) => {
+    var newArr = a.concat(b);
+    return this.unique(newArr);
+}
+
+/**
+ * 返回两个数组的交集
+ * @param {*} a 
+ * @param {*} b 
+ */
+export const intersect = (a, b) => {
+    var _this = this;
+    a = this.unique(a);
+    return this.map(a, function (o) {
+        return _this.contains(b, o) ? o : null;
+    });
+}
+
+/**
+ * 去除空格，type: 1-所有空格 2-前后空格 3-前空格 4-后空格
+ * @param {*} str 
+ * @param {*} type 
+ */
+export const trim = (str, type) => {
+    type = type || 1
+    switch (type) {
+        case 1:
+            return str.replace(/\s+/g, "");
+        case 2:
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        case 3:
+            return str.replace(/(^\s*)/g, "");
+        case 4:
+            return str.replace(/(\s*$)/g, "");
+        default:
+            return str;
+    }
+}
+
+/**
+ * 检测密码强度
+ * @param {*} str 
+ */
+export const checkPwd = (str) => {
+    var Lv = 0;
+    if (str.length < 6) {
+        return Lv
+    }
+    if (/[0-9]/.test(str)) {
+        Lv++
+    }
+    if (/[a-z]/.test(str)) {
+        Lv++
+    }
+    if (/[A-Z]/.test(str)) {
+        Lv++
+    }
+    if (/[\.|-|_]/.test(str)) {
+        Lv++
+    }
+    return Lv;
+}
+
+/**
+ * 判断两个对象是否键值相同
+ * @param {*} a 
+ * @param {*} b 
+ */
+export const isObjectEqual = (a, b) => {
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+
+    if (aProps.length !== bProps.length) {
+        return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+
+        if (a[propName] !== b[propName]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * url上追加参数
+ * @param {*} url 
+ * @param {*} key 
+ * @param {*} value 
+ */
+export const appendQuery = (url, key, value) => {
+    var options = key;
+    if (typeof options == 'string') {
+        options = {};
+        options[key] = value;
+    }
+    options = $.param(options);
+    if (url.includes('?')) {
+        url += '&' + options
+    } else {
+        url += '?' + options
+    }
+    return url;
+}
+
+
