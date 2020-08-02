@@ -1,11 +1,31 @@
 {
-    "name": "My First Extension",
-    "version": "1.0",
-    "description": "The first extension that I made.",
-    "browser_action": {
-        "default_icon": "icon.png"
+    "manifest_version": 2,
+    "name": "YKdemo",
+    "version": "1.0.0",
+    "description": "yukai 的测试插件",
+    "icons":
+    {
+        "16":"img/icon.png"
     },
-    "permissions": [
-        "http://api.flickr.com/"
+    "background":
+	{
+		"page": "html/background.html"
+	},
+    "browser_action": 
+	{
+		"default_icon": "img/icon.png",
+        "default_title": "这是一个示例Chrome插件",
+        "default_popup": "html/popup.html"
+    },
+    "content_scripts": 
+	[
+		{
+            "matches": ["<all_urls>"],
+            "js": ["js/index.js"]
+		}
+    ],
+	"permissions":
+    [
+
     ]
 }
