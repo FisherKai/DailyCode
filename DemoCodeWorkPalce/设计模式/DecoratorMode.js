@@ -48,3 +48,47 @@ Insurance(mb);
 console.log(mb.cost());
 
 console.log(mb.screenSize());
+
+// 抽象Decorator (抽象装饰者)
+// MacBook接口定义
+var MacBook = new Interface("MacBook", [
+    "addEngraving",
+    "addParallels",
+    "add4GBRam",
+    "add8GBRam",
+    "addCase"
+]);
+
+var MacBookPro = function () { };
+
+MacBookPro.prototype = {
+    addEngraving: function () {
+
+    },
+    addParallels: function () {
+
+    },
+    add4GBRam: function () {
+
+    },
+    add8GBRam: function () {
+
+    },
+    addCase: function () {
+
+    },
+    getPrice: function () {
+        return 900.00;
+    }
+};
+
+var MacBookDecorator = function (macBook) {
+    Interface.ensureImplements(macBook, MacBook);
+    this.macBook = macBook;
+};
+
+MacBookDecorator.prototype = {
+    addEngraving: function () {
+        return this.macBook.addEngraving();
+    }
+}
