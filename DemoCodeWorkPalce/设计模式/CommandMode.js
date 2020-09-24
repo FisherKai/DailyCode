@@ -5,7 +5,6 @@
 function CarManager() { }
 
 CarManager.prototype.execute = function (name) {
-    console.log([].slice.call(arguments, 1))
     return CarManager[name] && CarManager[name].apply(CarManager, [].slice.call(arguments, 1));
 };
 
