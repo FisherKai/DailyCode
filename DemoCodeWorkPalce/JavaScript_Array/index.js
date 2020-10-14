@@ -276,3 +276,28 @@ function getSum(total, num) {
 }
 var result = numbers.reduceRight(getSum);
 console.log(`从右往左依次减的值为:${result}`);
+
+/**
+ * reverse()	反转数组的元素顺序。
+ * 会改变原数组
+ */
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.reverse();
+console.log(fruits);
+
+/**
+ * shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+ * 注意： 此方法改变数组的长度！ 并且会改变原数组！
+ */
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+var shift=fruits.shift();
+console.log(`shift的值为:${shift}\nfruits数组的值为:`);
+fruits.forEach(function(ele){
+    console.log(ele);
+});
+
+/**
+ * slice()	选取数组的一部分，并返回一个新数组。
+ * slice()方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
+ * 注意： slice() 方法不会改变原始数组。
+ */
