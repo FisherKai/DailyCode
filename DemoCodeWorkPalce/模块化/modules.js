@@ -2,7 +2,7 @@
  * 模块管理机制
  */
 var MyModules = (function () {
-    var modules;
+    var modules = {};
 
     /**
      * 定义模块
@@ -52,8 +52,8 @@ MyModules.define('foo', ['bar'], function (bar) {
     }
 });
 
-var bar=MyModules.get('bar');
-var foo=MyModules.get('foo');
+var bar = MyModules.get('bar');
+var foo = MyModules.get('foo');
 
 bar.hello();
 foo.say();
