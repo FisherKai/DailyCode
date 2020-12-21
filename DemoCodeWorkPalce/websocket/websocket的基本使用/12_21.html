@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="请输入内容" />
+    <button>ssubmit</button>
+    <div></div>
+</body>
+<script>
+    var input = document.querySelector('input');
+    var btn = document.querySelector('button');
+    var div = document.querySelector('div');
+    var socket = new WebSocket('ws://localhost:3000');
+
+    socket.addEventListener('open', function () {
+        div.innerHTML = '链接成功';
+    });
+
+    btn.addEventListener('click', function () {
+        var value = input.value;
+        socket.send(value);
+    });
+
+    socket.addEventListener('message', function (e) {
+        div.innerHTML = e.data;
+    })
+
+</script>
+
+</html>
