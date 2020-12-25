@@ -16,7 +16,7 @@
     var input = document.querySelector('input');
     var btn = document.querySelector('button');
     var div = document.querySelector('div');
-    var socket = new WebSocket('ws://localhost:3000');
+    var socket = new WebSocket('ws://localhost:8099');
 
     socket.addEventListener('open', function () {
         div.innerHTML = '链接成功';
@@ -25,12 +25,14 @@
     btn.addEventListener('click', function () {
         var value = input.value;
         socket.send(value);
+        input.value='';
     });
 
     socket.addEventListener('message', function (e) {
-        div.innerHTML = e.data;
-    })
-
+        var p=document.createElement('p');
+        p.innerHTML=e.data;
+        div.appendChild(p);
+    });
 </script>
 
 </html>

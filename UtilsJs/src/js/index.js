@@ -396,4 +396,21 @@ export const appendQuery = (url, key, value) => {
     return url;
 }
 
+/**
+ * HTML文本转义
+ * @param {*} str 
+ */
+export const encode = (str) => {
+    if (str.length == 0) return "";
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "'");
+}
+
+/**
+ * HTML文本解码
+ */
+export const decode = () => {
+    if (str.length == 0) return "";
+    return str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/'/g, "\'");
+}
+
 
