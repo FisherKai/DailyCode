@@ -7,14 +7,18 @@
     <title>手写MVVM框架</title>
 </head>
 <!-- <script src="./node_modules/vue/dist/vue.js"></script> -->
+<script src="./js/watcher.js"></script>
+<script src="./js/observer.js"></script>
 <script src="./js/compile.js"></script>
 <script src="./js/MVVM.js"></script>
 
 <body>
     <div id="app">
         <input type="text" v-model="message" />
-        <div>2313</div>
-        <ul><li></li></ul>
+        <div>{{a.b}}</div>
+        <ul>
+            <li></li>
+        </ul>
         {{message}}
     </div>
     <script>
@@ -27,7 +31,10 @@
         new MVVM({
             el: "#app",
             data: {
-                message: 'yukai'
+                message: 'yukai',
+                a: {
+                    b: 1
+                }
             }
         })
     </script>
