@@ -69,6 +69,7 @@ function renderDom(eleObj) {
 function render(el, target) {
     let ele = renderDom(el);
     target.appendChild(ele);
+    return target;
 }
 
 export { createElement, render, Element, renderDom };

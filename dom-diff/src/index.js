@@ -2,6 +2,7 @@
 // const { render } = require("react-dom");
 
 import { createElement, render } from './element';
+import patch from './patch';
 import diff from './diff';
 
 let vertualDom1 = createElement('ul', { className: 'list' }, [
@@ -12,12 +13,12 @@ let vertualDom1 = createElement('ul', { className: 'list' }, [
 let vertualDom2 = createElement('ul', { className: 'list-group' }, [
     createElement('li', { className: 'item' }, ['a']),
     createElement('li', { className: 'item' }, ['c']),
-    createElement('li', { className: 'item' }, ['b'])])
+    createElement('div', { className: 'item' }, ['b'])])
+
+// render(vertualDom, document.getElementById('root'));
+let el = render(vertualDom1, document.getElementById('root'));
 
 let patchs = diff(vertualDom1, vertualDom2);
 console.log(patchs);
 
-
-// render(vertualDom, document.getElementById('root'));
-let re = render(vertualDom1, document.getElementById('root'));
-console.log(re);
+patch(el, patchs);
