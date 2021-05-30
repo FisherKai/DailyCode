@@ -11,9 +11,8 @@ let vertualDom1 = createElement('ul', { className: 'list' }, [
     createElement('li', { className: 'item' }, ['c'])])
 
 let vertualDom2 = createElement('ul', { className: 'list-group' }, [
-    createElement('li', { className: 'item' }, ['a']),
-    createElement('li', { className: 'item' }, ['c']),
-    createElement('div', { className: 'item' }, ['b'])])
+    createElement('li', { className: 'item' }, ['2']),
+    createElement('li', { className: 'item' }, ['b'])])
 
 // render(vertualDom, document.getElementById('root'));
 let el = render(vertualDom1, document.getElementById('root'));

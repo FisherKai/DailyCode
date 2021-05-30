@@ -72,4 +72,4 @@ function render(el, target) {
     return target;
 }
 
-export { createElement, render, Element, renderDom };
+export { createElement, render, Element, renderDom, setAttr };

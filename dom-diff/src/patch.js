@@ -1,4 +1,4 @@
-import { renderDom, Element } from './element';
+import { renderDom, Element, setAttr } from './element';
 import { ATTRS, REMOVE, REPLACE, TEXT } from './type';
 
 let allPatchs,
@@ -42,18 +42,27 @@ function doPatch(node, patchs) {
     patchs && patchs.forEach(p => {
         switch (p.type) {
             case ATTRS:
-                break;
-            case REPLACE:
-                console.log(node.parent)
-                let newNode = (p.newNode instanceof Element) ? renderDom(p.newNode) :
-                    document.createTextNode(p.newNode);
-                console.log(newNode.parent)
-                newNode.parent.replaceChild(newNode, node);
-                break;
-            case REMOVE:
+                for (const key in p.attrs) {
+                    let value = p.attrs[key];
+                    if (value) {
+                        setAttr(node, key, value);
+                    } else {
+                        node.removeAttribute(key);
+                    }
+                }
                 break;
             case TEXT:
                 node.textContent = p.text;
+                console.log(node.textContent, p.text)
+                break;
+            case REPLACE:
+                let newNode = (p.newNode instanceof Element) ? renderDom(p.newNode) :
+                    document.createTextNode(p.newNode);
+                console.log(newNode, node)
+                // node.parent.replaceChild(newNode, node);
+                break;
+            case REMOVE:
+                node.parent.removeChild(node);
                 break;
             default:
                 break;
