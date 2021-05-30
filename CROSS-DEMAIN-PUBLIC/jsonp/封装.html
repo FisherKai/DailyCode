@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装jsonp</title>
+</head>
+<body>
+
+</body>
+<script>
+    jsonp({
+        url: "http://localhost:3000/getjson",
+        params: {},
+        jsoncallback: 'callbackFunction'
+    }).then(function (data) {
+        console.log(data);
+        document.body.innerHTML = data;
+    })
+
+    function jsonp({ url, params, jsoncallback }) {
+        return new Promise((resolve, rejected) => {
+            let script = document.createElement('script');
+            window[jsoncallback] = function (data) {
+                resolve(data);
+                document.body.removeChild(script);
+            };
+            params = { ...params, jsoncallback };
+            let paramsArr = [];
+            for (const key in params) {
+                paramsArr.push(`${key}=${params[key]}`)
+            }
+            script.src = `${url}?${paramsArr.join('&')}`
+            document.body.appendChild(script);
+        })
+    }
+</script>
+</html>
