@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe src="http://localhost:4000/b.html" frameborder="0" id="iframe" onload="onload()"></iframe>
+</body>
+<script>
+    function onload(){
+        let iframe=document.getElementById('iframe');
+        iframe.contentWindow.postMessage('hello world','http://localhost:4000')
+    }
+    window.onmessage=function (e){
+        console.log(e.data);
+    }
+</script>
+</html>

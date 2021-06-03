@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        a和b是同域 http://localhost:3000
+        c是独立的 http://localhost:4000
+        a获取C的数据
+        1.a先把要传输数据放到引用C的location.hash上
+        2.c收到数据后可以把想要返回的数据引用到b的localtion.hash上
+        3.最后由b挂到window上
+    </p>
+    <iframe src="http://localhost:4000/c.html#helloworld" frameborder="0" id="iframe"></iframe>
+</body>
+<script>
+    window.onhashchange=function (){
+        console.log(location.hash);
+    }
+</script>
+
+</html>
