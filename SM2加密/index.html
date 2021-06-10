@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SM2加密</title>
+</head>
+<script src="./lib/crypto-js.js"></script>
+<script src="./lib/sm2.js"></script>
+
+<body>
+    <h1>SM2加密</h1>
+    <div>
+        <div>
+            <label for="encryption"></label>
+            <input type="text" value="hello fishkai" placeholder="请输入当前要加密的文本" id="encryption" name="encryption" />
+        </div>
+        <div>
+            <button onclick="toDoEncryption()">生成密文</button>
+            <button onclick="clearEncryption()">清空密文</button>
+        </div>
+    </div>
+
+    <div id="encryption-result">
+
+    </div>
+</body>
+<script>
+    var pubkeyHex = "0452712EBA7FE2C9615F6DE59C6EF662R085BD52B25952597CC95014BB8F201987F8D818EFFE710DBEC08FE2E4C7E3E0113EEBAB4B0E8B044E1A3CC8B149D76BE7";
+
+    function toDoEncryption() {
+        var encryptionText = document.querySelector('#encryption').value;
+        var result = SM2Utils.encs(encryptionText, pubkeyHex, '0');
+        var resNode = document.createElement('p');
+        resNode.innerHTML = result;
+        document.querySelector('#encryption-result').appendChild(resNode);
+    }
+
+    function clearEncryption() {
+        document.querySelector('#encryption-result').innerHTML = "";
+    }
+</script>
+
+</html>
