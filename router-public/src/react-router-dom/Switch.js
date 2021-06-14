@@ -13,10 +13,11 @@ export default class Switch extends Component {
                         const element = children[index];
                         let path = element.props.path || '';
 
+                        console.log(path)
                         if (pathToRegexp(path, [], { end: false }).test(pathName)) {
                             return element;
                         }
-                        return null;
+                        // return null;
                     }
                 }}
             </Consumer>
