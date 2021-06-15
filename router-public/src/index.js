@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { HashRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, Redirect, Switch } from './react-router-dom';
 import Home from './home';
 import Profile from './profile';
 import User from './user';
@@ -26,9 +26,9 @@ export default class App extends Component {
                     </div>
                     <div className="container">
                         <Switch>
-                            <Route path='/home' component={Home} />
                             <Route path='/profile' component={Profile} />
                             <Route path='/user' component={User} />
+                            <Route path='/home' component={Home} />
                             <Redirect to="/home"></Redirect>
                         </Switch>
                     </div>
