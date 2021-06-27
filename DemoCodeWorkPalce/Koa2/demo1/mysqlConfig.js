@@ -30,8 +30,8 @@ let allServices = {
         })
 
     },
-    findUserAll: async function () {
-        let _sql = `select * from user;`
+    findMenuAll: async function () {
+        let _sql = `select * from menu;`
         return await allServices.query(_sql)
     },
 }
