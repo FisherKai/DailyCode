@@ -1,5 +1,6 @@
 window.onload = function() {
     const imageList = document.querySelectorAll('img');
+    // callback一般会触发两次。一次是目标元素刚刚进入视口（开始可见），另一次是完全离开视口（开始不可见）。
     const observer = new IntersectionObserver((entries) => {
         entries && entries.forEach((entry) => {
             /**
