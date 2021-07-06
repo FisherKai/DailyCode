@@ -1,0 +1,44 @@
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: #282c34;
+}
+
+.App{
+    height: 80%;
+}
+
+.App p {
+    color: orange;
+    text-align: center;
+    font-size: 36px;
+}
+.m-container{
+    display: flex;
+    height: 50%;
+}
+
+.m-container .m-left{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.m-container .m-left span{
+    color: #fff;
+}
+
+.m-container .m-left button{
+    width: 50%;
+}
+
+.m-container .m-right{
+    flex: 1;
+    background-color: darkgrey;
+    margin: 20px;
+    padding: 20px;
+}
