@@ -2,7 +2,7 @@
 
 ## 主要依靠scroll-behavior: smooth; 
 
-### scroll-behavior 作用在根html上
+### scroll-behavior 作用在根html上 chrome 61上支持 IE不支持 安卓6.1以上支持
 
   1) `当用户手动导航或者 CSSOM scrolling API 触发滚动操作时，CSS 属性 scroll-behavior 为一个滚动框指定滚动行为，其他任何的滚动，例如那些由于用户行为而产生的滚动，不受这个属性的影响。在根元素中指定这个属性时，它反而适用于视窗。`
   2) 值
