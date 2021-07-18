@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div data-msg="这里是获取content的内容">
+        hover
+    </div>
+</body>
+<style>
+    div {
+        width: 100px;
+        border: 1px solid red;
+        position: relative;
+    }
+
+    div:hover:after {
+        content: attr(data-msg);
+        position: absolute;
+        font-size: 12px;
+        width: 200%;
+        line-height: 30px;
+        text-align: center;
+        left: 0;
+        top: 25px;
+        border: 1px solid green;
+    }
+</style>
+
+</html>
