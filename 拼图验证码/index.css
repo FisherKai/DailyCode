@@ -1,8 +1,9 @@
-html {
+:root {
     --width        : 400px;
     --height       : 260px;
     --puzzle-width : 80px;
     --puzzle-height: 80px;
+    --moved        : 0px;
 }
 
 body {
@@ -26,15 +27,15 @@ body {
 
 #captcha::after,
 #captcha::before {
-    position              : absolute;
-    content               : '';
-    display               : block;
-    width                 : inherit;
-    height                : inherit;
-    /* background-image   : inherit; */
-    background-color      : red;
-    background-size       : inherit;
-    background-position   : inherit;
+    position                 : absolute;
+    content                  : '';
+    display                  : block;
+    width                    : inherit;
+    height                   : inherit;
+    background-image         : inherit;
+    /* background-color      : red; */
+    background-size          : inherit;
+    background-position      : inherit;
 
     /* --webkit-clip-path: inset(
         calc((var(--hetght) - var(--puzzle-height))/2
@@ -44,4 +45,61 @@ body {
         )
     ); */
     clip-path: inset(90px 90px 90px 230px);
+
+}
+
+#captcha::after {
+    transform: translateX(clamp(-400px,
+                calc(-400px + var(--moved)),
+                80px));
+    transition: .25s all ease-in-out;
+}
+
+#captcha:active::after {
+    transition: none;
+}
+
+#captcha::before {
+    background-color     : rgba(0, 0, 0, .6);
+    background-blend-mode: hard-light;
+}
+
+#handle {
+    /* width+p_width*2 */
+    width           : 560px;
+    height          : 30px;
+    border-radius   : 18px;
+    background-color: #eee;
+    position        : absolute;
+    bottom          : -50px;
+    /* p_width*2*-1 */
+    left            : -160px;
+    box-shadow      : inset 0px 0px 12px rgba(0, 0, 0, .3);
+    border          : 3px solid #ccc;
+}
+
+#handle span {
+    display         : block;
+    width           : 80px;
+    height          : inherit;
+    border-radius   : inherit;
+    background-color: #fff;
+    box-shadow      : inset 0px 0px 6px rgba(0, 0, 0, .25), 0px 2px 4px rgba(0, 0, 0, .3);
+    position        : absolute;
+    cursor          : move;
+    transform       : translateX(clamp(0px,
+                var(--moved),
+                480px));
+
+    transition: .25s all ease-in-out;
+}
+
+#captcha:active #handle span {
+    transition: none;
+}
+
+#captcha.pass::before,
+#captcha.pass::after,
+#captcha.pass #handle {
+    opacity: 0;
 }
