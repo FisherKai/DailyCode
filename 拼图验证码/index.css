@@ -1,8 +1,8 @@
-html{
+html {
     --width        : 400px;
     --height       : 260px;
     --puzzle-width : 80px;
-    --puzzle-height: 80px; 
+    --puzzle-height: 80px;
 }
 
 body {
@@ -26,15 +26,15 @@ body {
 
 #captcha::after,
 #captcha::before {
-    position           : absolute;
-    content            : '';
-    display            : block;
-    width              : inherit;
-    height             : inherit;
+    position              : absolute;
+    content               : '';
+    display               : block;
+    width                 : inherit;
+    height                : inherit;
     /* background-image   : inherit; */
-    background-color: red;
-    background-size    : inherit;
-    background-position: inherit;
+    background-color      : red;
+    background-size       : inherit;
+    background-position   : inherit;
 
     /* --webkit-clip-path: inset(
         calc((var(--hetght) - var(--puzzle-height))/2
