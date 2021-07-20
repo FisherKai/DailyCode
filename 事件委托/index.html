@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+<style>
+    #big {
+        background: green;
+        width: 300px;
+        height: 300px;
+    }
+
+    #center {
+        background: blue;
+        width: 200px;
+        height: 200px;
+    }
+
+    #small {
+        background: red;
+        width: 100px;
+        height: 100px;
+    }
+</style>
+
+<body>
+    <div id="big">
+        <div id="center">
+            <div id="small"></div>
+        </div>
+    </div>
+</body>
+<script>
+    let big = document.querySelector('#big');
+    let center = document.querySelector('#center');
+    let small = document.querySelector('#small');
+
+    big.onclick = function () {
+        console.log(`i am big`);
+    }
+
+    center.onclick = function () {
+        console.log(`i am center`);
+    }
+
+    small.onclick = function () {
+        console.log(`i am small`);
+    }
+</script>
+
+</html>
