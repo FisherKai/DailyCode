@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS实现轮播图</title>
+</head>
+
+<style>
+    :root {
+        --width: 200px;
+        --height: 100px;
+    }
+
+    li {
+        width: var(--width);
+        height: var(--height);
+        float: left;
+        display: block;
+    }
+
+    li:nth-of-type(1) {
+        background: red;
+    }
+
+    li:nth-of-type(2) {
+        background: orange;
+    }
+
+    li:nth-of-type(3) {
+        background: yellow;
+    }
+
+    li:nth-of-type(4) {
+        background: green;
+    }
+
+    li:nth-of-type(5) {
+        background: blue;
+    }
+
+    .list{
+        z-index: -1;
+    }
+
+    /* 覆盖掉li和ul自带的样式 */
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    #banner {
+        width: var(--width);
+        height: var(--height);
+        border: .2rem dashed purple;
+        margin: 0 auto;
+        z-index: 999;
+        /* overflow: hidden; */
+    }
+</style>
+
+<body>
+    <div id="banner">
+        <ul class="list">
+            <li>
+                <div class="image"></div>
+            </li>
+            <li>
+                <div class="image"></div>
+            </li>
+            <li>
+                <div class="image"></div>
+            </li>
+            <li>
+                <div class="image"></div>
+            </li>
+            <li>
+                <div class="image"></div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        let width = 200, height = 100;
+        let list = document.querySelector('.list');
+        let liList = document.querySelectorAll('li');
+
+        list.style.width = width * liList.length+'px';
+    }
+</script>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯CSS实现轮播图</title>
+</head>
+
+<style>
+    :root {
+        --width: 20rem;
+        --height: 10rem;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        align-items: center;
+    }
+
+    div.slide {
+        width: var(--width);
+        height: var(--height);
+        border: .2rem dashed purple;
+
+        overflow: hidden;
+    }
+
+    li.item {
+      width: var(--width);
+      height: inherit;
+      box-sizing: border-box;
+      border: .2rem solid pink;
+      background-color: maroon;
+      color: #fff;
+      font-size: 4rem;
+      text-align: center;
+      line-height: var(--height);
+
+      /* 加浮动排成一行 */
+      float: left;
+    }
+
+    ul.list {
+      width: calc(var(--width) * 3);
+      height: inherit;
+      /* 加边框看下ul.list的宽度 */
+      /* border: .5rem dashed blue; */
+      position: relative;
+      z-index: -1;
+
+      animation: move 5s ease 1s infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(calc(0 * var(--width)));
+      }
+      50% {
+        transform: translate(calc(-1 * var(--width)));
+      }
+      100% {
+        transform: translate(calc(-2 * var(--width)));
+      }
+    }
+</style>
+
+<body>
+    <div class="slide">
+        <ul class="list">
+            <li class="item">
+                1
+            </li>
+            <li class="item">
+                2
+            </li>
+            <li class="item">
+                3
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
