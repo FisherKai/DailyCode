@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket使用</title>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+    <input type="text" class="input-area">
+    <button class="btn" onclick="send()">发送</button>
+</body>
+<script src="http://cdn.socket.io/4.1.2/socket.io.min.js"
+    integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg"
+    crossorigin="anonymous"></script>
+<script>
+    const socket = io(`ws://127.0.0.1:4000?id=23112312`);
+    const inpt = document.querySelector('.input-area');
+    const btn = document.querySelector('.btn');
+    const container = document.querySelector('.container');
+
+    function send() {
+        socket.connect();
+        socket.emit('sendMsg', inpt.value);
+    }
+
+    socket.on('receiveMsg', function (data) {
+        console.log('服务器向客户端发送消息', data)
+        let e = document.createElement('p');
+        e.innerHTML = data;
+        container.appendChild(e);
+    })
+</script>
+
+</html>
