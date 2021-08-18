@@ -32,4 +32,4 @@ function arr3(array_data){
     return array_data.toString().split(',');
 }
 
-arr3(data)
+console.log(arr1(data))
