@@ -39,15 +39,17 @@
     let center = document.querySelector('#center');
     let small = document.querySelector('#small');
 
-    big.onclick = function () {
+    big.onclick = function (e) {
         console.log(`i am big`);
     }
 
-    center.onclick = function () {
+    center.onclick = function (e) {
         console.log(`i am center`);
     }
 
-    small.onclick = function () {
+    small.onclick = function (e) {
+        // 阻止事件冒泡
+        e.stopPropagation()
         console.log(`i am small`);
     }
 </script>
