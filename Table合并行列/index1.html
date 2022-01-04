@@ -1,0 +1,107 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+
+<body>
+    <table border="1">
+        <thead id="tb" οnclick="findcell()">
+            <tr>
+                <td>国家</td>
+                <td>国家</td>
+                <td>国家</td>
+            </tr>
+            <tr>
+                <td>国家555</td>
+                <td>河南</td>
+                <td>国家2</td>
+            </tr>
+            <tr>
+                <td>中国</td>
+                <td>四川</td>
+                <td>国家3</td>
+            </tr>
+            <tr>
+                <td>中国</td>
+                <td>四川</td>
+                <td>北京4</td>
+            </tr>
+            <tr>
+                <td>美国</td>
+                <td>纽约</td>
+                <td>国家4</td>
+            </tr>
+            <tr>
+                <td>美国</td>
+                <td>洛杉矶</td>
+                <td>国家4</td>
+            </tr>
+            <tr>
+                <td>英国</td>
+                <td>英国</td>
+                <td>国家4</td>
+            </tr>
+        </thead>
+        <!-- <tbody>
+      <tr>
+        <td>不合并</td>
+        <td>不合并</td>
+        <td>不合并</td>
+      </tr>
+    </tbody> -->
+    </table>
+
+    <button onclick="SpanGrid('tb')">合并</button>
+</body>
+<script>
+
+    let rowBeginIndex
+    let colIndex
+
+    (function () {   //定义函数
+        var tr = document.getElementsByTagName("tr");
+        for (var i = 0; i < tr.length; i++) {
+            var tds = tr[i].children;
+            for (var j = 0; j < tds.length; j++) {
+                var row = i + 1, col = j + 1;
+                tds[j].setAttribute("row", row);
+                tds[j].setAttribute("col", col);
+            }
+        }
+    })();
+
+    function SpanGrid(tabObjId) {
+        var tabObj = document.getElementById(tabObjId);
+        var list = tabObj.children;
+        for (let i = 0; i < list.length; i++) {
+            const i1 = list[i];
+            let temp = null, z = 1, s = [];
+            for (let j = 0; j < i1.children.length; j++) {
+                const j1 = i1.children[j];
+                if ((temp && temp.innerHTML) === j1.innerHTML) {
+                    temp.innerHTML = "";
+                    s.push(temp);
+                    z++;
+                    temp = j1;
+                } else {
+                    temp = j1;
+                }
+            }
+            for (let w = 0; w < s.length; w++) {
+                const element = s[w];
+                i1.removeChild(element)
+            }
+            temp.setAttribute("colspan", z);
+            // rowspan
+            temp.style.textAlign = "center";
+        }
+    }
+
+</script>
+
+</html>
