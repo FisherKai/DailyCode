@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    var app = document.querySelector('#app');
+    var fragment = document.createDocumentFragment();
+    for (let index = 0; index < 100000; index++) {
+        var div = document.createElement('div');
+        div.innerHTML = index;
+        fragment.appendChild(div);
+    }
+    app.appendChild(fragment);
+</script>
+
+</html>
