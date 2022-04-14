@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../lib/axios.min.js"></script>
 <style>
     html,
     body {
@@ -44,15 +44,19 @@
 
     // 定义存储全局数据
     let allData = [];
-    let startIndex = 0, endIndex = 0, itemHeight = 135 + 5 * 2 + 1 * 2 + 10;
+    let indexObj = {
+        startIndex: 0,
+        endIndex: 0
+    }, itemHeight = 135 + 5 * 2 + 1 * 2 + 10;
     let containerSize = Math.ceil(height / itemHeight);
 
     window.onload = getData;
 
     app.onscroll = function () {
-        startIndex = Math.floor(app.scrollTop / itemHeight);
-        // endIndex =
-        // console.log(startIndex, (container.offsetHeight - app.scrollTop) / itemHeight + startIndex);
+        indexObj.startIndex = Math.floor(app.scrollTop / itemHeight);
+        indexObj.endIndex = indexObj.startIndex + containerSize;
+        indexObj.endIndex > allData.length - 1 && (indexObj.endIndex = allData.length - 1);
+        // console.log(indexObj);
         if (app.scrollTop > 0 && app.scrollTop + height === container.offsetHeight + 20) {
             // 触底了
             getData();
@@ -83,6 +87,24 @@
         }
         return targetEle;
     }
+
+    // 监听indexObj
+    function proxyObj(data) {
+        Object.keys(data).forEach(key => {
+            Object.defineProperty(data, key, {
+                set(newValue) {
+                    if (newValue !== data[key]) {
+                        data[key] = newValue;
+                        console.log(`哇哇哇`);
+                    }
+                },
+                get() {
+                    return data[key];
+                }
+            })
+        })
+    }
+    proxyObj(indexObj)
 </script>
 
 </html>
