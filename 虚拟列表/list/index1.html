@@ -7,19 +7,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    html,
+    body {
+        /* width: 100vw;
+        height: 100vh; */
+        margin: 0;
+        padding: 0;
+    }
+
+    #app {
+        height: 100vh;
+        overflow-y: auto;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div id="container"></div>
+    </div>
 </body>
 <script>
+    // 容器
     var app = document.querySelector('#app');
+    var container = document.querySelector('#container');
     var fragment = document.createDocumentFragment();
-    for (let index = 0; index < 100000; index++) {
-        var div = document.createElement('div');
-        div.innerHTML = index;
-        fragment.appendChild(div);
+    // 获取屏幕参数
+    const height = window.innerHeight;
+    const width = window.innerWidth;
+
+    // 定义存储全局数据
+    let allData = [];
+
+    window.onload = getData;
+
+    app.onscroll = function () {
+        if (app.scrollTop > 0 && app.scrollTop + height === container.offsetHeight + 20) {
+            // 触底了
+            getData();
+        }
     }
-    app.appendChild(fragment);
+
+    function getData() {
+        axios.get('http://localhost:4000/data?num=10').then(res => {
+            let result = res.data.list;
+            allData = allData.concat(result);
+            result.forEach(element => {
+                fragment.appendChild(getRenderElement(element));
+            });
+            container.appendChild(fragment);
+        })
+    }
+
+    // 获取渲染的每一项
+    function getRenderElement(data) {
+        let targetEle = document.createElement('div');
+        targetEle.className = "item";
+        let keys = Object.keys(data), values = Object.values(data);
+        for (let index = 0; index < keys.length; index++) {
+            let ele = document.createElement('div');
+            ele.className = keys[index];
+            ele.innerText = values[index];
+            targetEle.appendChild(ele);
+        }
+        return targetEle;
+    }
 </script>
 
 </html>
