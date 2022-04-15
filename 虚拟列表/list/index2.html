@@ -43,12 +43,12 @@
     const width = window.innerWidth;
 
     // 定义存储全局数据
-    let allData = [];
-    let indexObj = {
+    var allData = [], itemHeight = 135 + 5 * 2 + 1 * 2 + 10;
+    var containerSize = Math.ceil(height / itemHeight);
+    var indexObj = {
         startIndex: 0,
-        endIndex: 0
-    }, itemHeight = 135 + 5 * 2 + 1 * 2 + 10;
-    let containerSize = Math.ceil(height / itemHeight);
+        endIndex: this.startIndex + containerSize,
+    };
 
     window.onload = getData;
 
@@ -56,7 +56,6 @@
         indexObj.startIndex = Math.floor(app.scrollTop / itemHeight);
         indexObj.endIndex = indexObj.startIndex + containerSize;
         indexObj.endIndex > allData.length - 1 && (indexObj.endIndex = allData.length - 1);
-        // console.log(indexObj);
         if (app.scrollTop > 0 && app.scrollTop + height === container.offsetHeight + 20) {
             // 触底了
             getData();
@@ -72,6 +71,15 @@
             });
             container.appendChild(fragment);
         })
+    }
+
+    function render() {
+        console.log(indexObj.startIndex, indexObj.endIndex);
+        let result = allData.slice(indexObj.startIndex, indexObj.endIndex);
+        result.forEach(element => {
+            fragment.appendChild(getRenderElement(element));
+        });
+        container.appendChild(fragment);
     }
 
     // 获取渲染的每一项
@@ -93,18 +101,18 @@
         Object.keys(data).forEach(key => {
             Object.defineProperty(data, key, {
                 set(newValue) {
-                    if (newValue !== data[key]) {
-                        data[key] = newValue;
-                        console.log(`哇哇哇`);
+                    if (newValue !== data[`_${key}`]) {
+                        data[`_${key}`] = newValue;
+                        render();
                     }
                 },
                 get() {
-                    return data[key];
+                    return data[`_${key}`];
                 }
             })
         })
     }
-    proxyObj(indexObj)
+    proxyObj(indexObj);
 </script>
 
 </html>
