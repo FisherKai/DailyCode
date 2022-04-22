@@ -1,6 +1,6 @@
 Array.prototype._sort = function (fun) {
-    let startIndex = 0, endIndex = this.length - 1, index = 0;
-    for (startIndex = 0; startIndex < this.length - 1; startIndex++) {
+    let startIndex = 0, endIndex = this.length - 1;
+    for (startIndex = 0; startIndex < endIndex; startIndex++) {
         // console.log(this[startIndex], this[startIndex + 1]);
         console.log(fun(this[startIndex + 1], this[startIndex]));
         if (fun(startIndex + 1, startIndex) > 0) {
