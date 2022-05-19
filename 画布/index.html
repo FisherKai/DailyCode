@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布</title>
+</head>
+
+<body>
+    <canvas width="1200" height="600"></canvas>
+    <button>擦除</button>
+</body>
+<script>
+    //获取canvas元素
+    var canvas = document.querySelector("canvas");
+    //canvas元素有一个getContext()的方法，这个方法是用来获得渲染上下文和它的绘画功能。
+    //此案例是对于2D图像而言，用法如下所示
+    var ctx = canvas.getContext("2d");
+    //获取button元素
+    var bn = document.querySelector("button");
+    //设置边线颜色
+    ctx.strokeStyle = "red";
+    //设置一个bool值，值为true 代表擦除，值为false代表绘制，默认false
+    var bool = false;
+    //给画布添加一个鼠标按下的事件监听
+    canvas.addEventListener("mousedown", mouseHandler);
+    //给按钮添加一个鼠标点击的事件监听
+    bn.addEventListener("click", clickHandler);
+
+    function clickHandler(e) {
+        //当按钮被点击时，为擦除功能，切换bool值和对应的按钮内容
+        bool = !bool;
+        if (bool) {
+            bn.textContent = "绘制";
+        } else {
+            bn.textContent = "擦除";
+        }
+    }
+
+    function mouseHandler(e) {
+        if (!bool) {
+            //当bool为false时，执行绘制功能，否则擦除功能。
+            drawLine(e);
+        } else {
+            clearLine(e);
+        }
+    }
+
+    function clearLine(e) {
+        if (e.type === "mousedown") {
+            //设置一个清除矩形，左上角坐标为前面两个参数，
+            //第三个参数是清除矩形的宽度，最后一个参数是清除矩形的高度，都是以像素为单位。
+            //e.offsetX,e.offsetY 为当前鼠标按下的坐标
+            ctx.clearRect(e.offsetX, e.offsetY, 70, 70);
+            //添加两个事件监听
+            canvas.addEventListener("mousemove", mouseHandler);
+            canvas.addEventListener("mouseup", mouseHandler);
+        } else if (e.type === "mousemove") {
+            ctx.clearRect(e.offsetX, e.offsetY, 70, 70);
+        } else if (e.type === "mouseup") {
+            //鼠标抬起，清除监听功能
+            canvas.removeEventListener("mousemove", mouseHandler);
+            canvas.removeEventListener("mouseup", mouseHandler);
+        }
+    }
+
+    function drawLine(e) {
+        if (e.type === "mousedown") {
+            //起始一条路径，或者重绘当前路径
+            ctx.beginPath();
+            //起始点
+            ctx.moveTo(e.offseeeetX, e.offsetY);
+            canvas.addEventListener("mousemove", mouseHandler);
+            canvas.addEventListener("mouseup", mouseHandler);
+        } else if (e.type === "mousemove") {
+            //终点
+            ctx.lineTo(e.offsetX, e.offsetY);
+            //开始绘制
+            ctx.stroke();
+        } else if (e.type === "mouseup") {
+            canvas.removeEventListener("mousemove", mouseHandler);
+            canvas.removeEventListener("mouseup", mouseHandler);
+        }
+    }
+
+</script>
+
+</html>
