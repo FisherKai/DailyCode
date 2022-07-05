@@ -37,6 +37,7 @@ let effect = () => {
 
 track(product, "quantity");
 effect();
+console.log(total);
 product.quantity = 3;
 trigger(product, "quantity");
 console.log(total);
