@@ -1,6 +1,6 @@
 <template>
   <section class="drag-of-container">
-    <div id="slot" @drag="slotDrag" draggable="true" ref="slot"></div>
+    <div id="slot" @dragenter="slotDragEnter" @dragleave="slotDragLeave" draggable="true" ref="slot"></div>
     <div id="block" @drag="blockDrag" draggable="true" ref="block"></div>
   </section>
 </template>
@@ -9,14 +9,23 @@
 export default {
   name: "DragComponentOne",
   setup() {
-   
+
+  },
+  data() {
   },
   methods: {
-    slotDrag(e) {
+    slotDragEnter(e) {
+      console.log(e, this.$refs.slot.appendChild,this.$refs.block);
+      this.$refs.slot.style.border = `2px solid red`;
+      this.$refs.slot.appendChild(this.$refs.block);
+    },
+    slotDragLeave(e) {
       console.log(e);
+      this.$refs.slot.style.border = `2px solid black`;
     },
     blockDrag(e) {
-      console.log(e);
+      e
+      // console.log(e);
     },
   },
 };
@@ -27,12 +36,16 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 #slot {
   position: fixed;
   border: 2px solid black;
   width: 100px;
   height: 100px;
+  top: 20%;
+  left: 20%;
 }
+
 #block {
   position: fixed;
   top: 50%;
