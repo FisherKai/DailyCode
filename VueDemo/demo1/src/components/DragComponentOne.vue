@@ -1,20 +1,30 @@
 <template>
   <section class="drag-of-container" id="drag-of-container">
-    <div id="slot" @dragenter="slotDragEnter" @dragover="slotDragOver" @drop="slotDrop" @dragleave="slotDragLeave"
-      draggable="true" ref="slot">
-    </div>
-    <div id="block" @drag="blockDrag" @dragover="blockDragOver" @drop="blockDrop" draggable="true" ref="block"></div>
+    <div
+      id="slot"
+      @dragenter="slotDragEnter"
+      @dragover="slotDragOver"
+      @drop="slotDrop"
+      @dragleave="slotDragLeave"
+      draggable="true"
+      ref="slot"
+    ></div>
+    <div
+      id="block"
+      @drag="blockDrag"
+      @dragover="blockDragOver"
+      @drop="blockDrop"
+      draggable="true"
+      ref="block"
+    ></div>
   </section>
 </template>
 
 <script>
 export default {
   name: "DragComponentOne",
-  setup() {
-
-  },
-  data() {
-  },
+  setup() {},
+  data() {},
   methods: {
     slotDragEnter(e) {
       console.log(e);
@@ -33,22 +43,29 @@ export default {
       const block = document.getElementById("block");
       block.style.position = "fixed";
       slot.removeChild(block);
-      container.append(block)
+      container.append(block);
     },
     slotDrop(e) {
       console.log(e, this.$refs.slot.hasChildNodes());
       const slot = document.getElementById("slot");
       const block = document.getElementById("block");
       block.style.position = "static";
-      slot.append(block)
+      this.$refs.slot.style.border = `2px solid red`;
+      slot.append(block);
     },
-    slotDragLeave(e) {
-      console.log(e);
+    slotDragLeave() {
       this.$refs.slot.style.border = `2px solid black`;
-
+      if (this.$refs.slot.hasChildNodes()) {
+        const container = document.getElementById("drag-of-container");
+        const slot = document.getElementById("slot");
+        const block = document.getElementById("block");
+        block.style.position = "fixed";
+        slot.removeChild(block);
+        container.append(block);
+      }
     },
     blockDrag(e) {
-      e
+      e;
       // console.log(e);
     },
   },
