@@ -7,7 +7,7 @@ export default function Father() {
     const fatherNameRef = useRef();
     const ChildMemo = useMemo(() => {
         return Child;
-    });
+    },[fatherName]);
     const ChildMemo2 = useMemo(() => {
         return Child2;
     })
