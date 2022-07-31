@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo,useCallback } from "react";
 import Child from "./Child";
 import Child2 from "./Child2";
 
@@ -8,8 +8,8 @@ export default function Father() {
     const ChildMemo = useMemo(() => {
         return Child;
     },[fatherName]);
-    const ChildMemo2 = useMemo(() => {
-        return Child2;
+    const ChildMemo2 = useCallback(() => {
+        return <Child2></Child2>;
     })
     return (
         <div>
