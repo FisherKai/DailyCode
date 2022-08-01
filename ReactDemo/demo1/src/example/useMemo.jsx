@@ -1,3 +1,7 @@
+/**
+ * useMemo 可以用于缓存计算结果，防止多次计算
+ */
+
 import React, { useState,useMemo } from 'react';
 
 // function WithoutMemo() {

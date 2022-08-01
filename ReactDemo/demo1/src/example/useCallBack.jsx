@@ -1,3 +1,6 @@
+/**
+ * useCallback 可以缓存回调函数，减少子组件更新次数
+ */
 import React, { useState, useCallback, useEffect } from "react";
 export default function Parent() {
     const [count, setCount] = useState(1);
