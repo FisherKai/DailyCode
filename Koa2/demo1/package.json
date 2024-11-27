@@ -21,7 +21,7 @@
     "koa-views": "^6.2.0",
     "koa2-cors": "^2.0.6",
     "mysql": "^2.18.1",
-    "pug": "^2.0.3"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
