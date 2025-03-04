@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <div id="inner"></div>
+    </div>
+    <button id="start">开始</button>
+    <button id="stop">暂停</button>
+    <button id="over">结束</button>
+</body>
+<style>
+    #box {
+        width: 800px;
+        height: 500px;
+        position: relative;
+        border: 5px solid red;
+        margin: 20px auto;
+    }
+ 
+    #inner {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        background-color: #00f;
+        border-radius: 50%;
+    }
+</style>
+<script>
+    var box = document.querySelector("#box");
+    var inner = document.querySelector("#inner");
+    var start = document.querySelector("#start");
+    var end = document.querySelector("#stop");
+    var over = document.querySelector("#over");
+    var innerLeft = 0;
+    var innerTop = 0;
+    end.disabled = true;
+    over.disabled = true;
+    var moveX = true;
+    var moveY = true;
+ 
+    function random(m, n) {
+        return Math.floor(Math.random() * (n - m + 1) + m);
+    }
+ 
+    function color() {
+        return "rgb(" + random(0, 255) + "," + random(0, 255) + "," + random(0, 255) + ")";
+    }
+    start.onclick = function () {
+        start.disabled = true;
+        end.disabled = false;
+        over.disabled = false;
+        Xmax = box.clientWidth - inner.clientWidth;
+        Ymax = box.clientHeight - inner.clientHeight;
+        timer = setInterval(function () {
+            if (moveX == true) {
+                if (innerLeft <= Xmax) {
+                    innerLeft++;
+                } else {
+                    moveX = false;
+                    inner.style.backgroundColor=color();
+                }
+ 
+            } else {
+ 
+                if (innerLeft >= 0) {
+                    innerLeft--;
+                } else {
+                    moveX = true;
+                    inner.style.backgroundColor=color();
+                }
+            }
+            if (moveY == true) {
+                if (innerTop <= Ymax) {
+                    innerTop++;
+                } else {
+                    moveY = false;
+                    inner.style.backgroundColor=color();
+                }
+ 
+            } else {
+                if (innerTop >= 0) {
+                    innerTop--;
+                } else {
+                    moveY = true;
+                    inner.style.backgroundColor=color();
+                }
+            }
+            inner.style.left = innerLeft + "px";
+            inner.style.top = innerTop + "px";
+        }, 5);
+    }
+    end.onclick = function () {
+        clearInterval(timer);
+        start.disabled = false;
+        this.disabled = true;
+    }
+    over.onclick = function () {
+        clearInterval(timer);
+        innerLeft = 0;
+        innerTop = 0;
+        inner.style.left = innerLeft + "px";
+        inner.style.top = innerTop + "px";
+        start.disabled = false;
+        inner.style.backgroundColor= "#00f";
+    }
+</script>
+</html>
